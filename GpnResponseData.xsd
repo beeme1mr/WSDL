@@ -1,0 +1,33 @@
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="GpnResponseData">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="MonitorDesignator">
+          <xs:complexType>
+            <xs:simpleContent>
+              <xs:extension base="xs:string">
+                <xs:attribute type="xs:string" name="MonitorClassDesignator"/>
+              </xs:extension>
+            </xs:simpleContent>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="TXTIMEGROUP">
+          <xs:complexType>
+            <xs:simpleContent>
+              <xs:extension base="xs:string">
+                <xs:attribute type="xs:int" name="monitor_id"/>
+                <xs:attribute type="xs:float" name="avail"></xs:attribute>
+                
+                <xs:attribute type="xs:float" name="avgresp" /><xs:attribute type="xs:float" name="avgDNS"/>
+                <xs:attribute type="xs:float" name="avgConnect"/>
+                <xs:attribute type="xs:float" name="avgFirstByte"/>
+                <xs:attribute type="xs:float" name="avgContent"/>
+                <xs:attribute type="xs:float" name="avgSSL"/>
+              </xs:extension>
+            </xs:simpleContent>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

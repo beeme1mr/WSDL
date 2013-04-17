@@ -1,0 +1,883 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tns="http://gomeznetworks.com/webservices/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" targetNamespace="http://gomeznetworks.com/webservices/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://gomeznetworks.com/webservices/">
+      <s:element name="GSRAuthenticate">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sUsername" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sPassword" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GSRAuthenticateResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GSRAuthenticateResult" type="tns:CAccountAuthenticationDataExport" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="CAccountAuthenticationDataExport">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Status" type="tns:COpStatusData" />
+          <s:element minOccurs="0" maxOccurs="1" name="AccountConstraints" type="tns:CAccountAuthenticationData" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="COpStatusData">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="eStatus" type="tns:eStat" />
+          <s:element minOccurs="0" maxOccurs="1" name="sErrorMessage" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:simpleType name="eStat">
+        <s:restriction base="s:string">
+          <s:enumeration value="STATUS_SUCCESS" />
+          <s:enumeration value="STATUS_FAILED" />
+          <s:enumeration value="STATUS_DATA_NOT_READY" />
+        </s:restriction>
+      </s:simpleType>
+      <s:complexType name="CAccountAuthenticationData">
+        <s:attribute name="MaxScriptPages" type="s:string" />
+      </s:complexType>
+      <s:element name="GetAccountConfigPackage">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sUsername" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sPassword" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetAccountConfigPackageResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetAccountConfigPackageResult" type="tns:CAccountConfigPackage" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="CAccountConfigPackage">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Status" type="tns:COpStatusData" />
+          <s:element minOccurs="0" maxOccurs="1" name="AccountInfo" type="tns:CAccountData" />
+          <s:element minOccurs="0" maxOccurs="1" name="MonitorSet" type="tns:ArrayOfCMonitorData" />
+          <s:element minOccurs="0" maxOccurs="1" name="SiteSet" type="tns:ArrayOfCSiteData" />
+          <s:element minOccurs="0" maxOccurs="1" name="BackboneSet" type="tns:ArrayOfCBackboneData" />
+          <s:element minOccurs="0" maxOccurs="1" name="GeoSet" type="tns:ArrayOfCGeographyData" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="CAccountData">
+        <s:attribute name="name" type="s:string" />
+        <s:attribute name="title" type="s:string" />
+        <s:attribute name="first" type="s:string" />
+        <s:attribute name="last" type="s:string" />
+        <s:attribute name="username" type="s:string" />
+        <s:attribute name="address1" type="s:string" />
+        <s:attribute name="address2" type="s:string" />
+        <s:attribute name="city" type="s:string" />
+        <s:attribute name="state" type="s:string" />
+        <s:attribute name="zip" type="s:string" />
+        <s:attribute name="email" type="s:string" />
+        <s:attribute name="phone" type="s:string" />
+        <s:attribute name="fax" type="s:string" />
+        <s:attribute name="gmtoffset" type="s:string" />
+        <s:attribute name="timezone" type="s:string" />
+      </s:complexType>
+      <s:complexType name="ArrayOfCMonitorData">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Monitor" nillable="true" type="tns:CMonitorData" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="CMonitorData">
+        <s:attribute name="mid" type="s:string" />
+        <s:attribute name="desc" type="s:string" />
+        <s:attribute name="url" type="s:string" />
+        <s:attribute name="class" type="s:string" />
+        <s:attribute name="status" type="s:string" />
+        <s:attribute name="account" type="s:string" />
+        <s:attribute name="timeoutinsec" type="s:string" />
+        <s:attribute name="frequencyinms" type="s:string" />
+        <s:attribute name="docomponents" type="s:string" />
+        <s:attribute name="created" type="s:string" />
+        <s:attribute name="modified" type="s:string" />
+      </s:complexType>
+      <s:complexType name="ArrayOfCSiteData">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Site" nillable="true" type="tns:CSiteData" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="CSiteData">
+        <s:attribute name="sid" type="s:string" />
+        <s:attribute name="name" type="s:string" />
+        <s:attribute name="status" type="s:string" />
+        <s:attribute name="city" type="s:string" />
+        <s:attribute name="state" type="s:string" />
+        <s:attribute name="country" type="s:string" />
+        <s:attribute name="IP" type="s:string" />
+        <s:attribute name="backboneId" type="s:string" />
+        <s:attribute name="backbone" type="s:string" />
+        <s:attribute name="isURL" type="s:string" />
+        <s:attribute name="isEmpirix" type="s:string" />
+        <s:attribute name="isUTA" type="s:string" />
+      </s:complexType>
+      <s:complexType name="ArrayOfCBackboneData">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Backbone" nillable="true" type="tns:CBackboneData" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="CBackboneData">
+        <s:attribute name="id" type="s:string" />
+        <s:attribute name="name" type="s:string" />
+      </s:complexType>
+      <s:complexType name="ArrayOfCGeographyData">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Geo" nillable="true" type="tns:CGeographyData" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="CGeographyData">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="GeoSite" type="s:string" />
+        </s:sequence>
+        <s:attribute name="id" type="s:string" />
+        <s:attribute name="name" type="s:string" />
+        <s:attribute name="tlev" type="s:string" />
+        <s:attribute name="prec" type="s:string" />
+        <s:attribute name="status" type="s:string" />
+        <s:attribute name="class" type="s:string" />
+      </s:complexType>
+      <s:element name="GetAccountPackageByMonitorClass">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sUsername" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sPassword" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sMonitorClasss" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetAccountPackageByMonitorClassResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetAccountPackageByMonitorClassResult" type="tns:CAccountConfigPackage" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetAccountMonitors">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sUsername" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sPassword" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sMonitorSetDesignator" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sStatusDesignator" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetAccountMonitorsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetAccountMonitorsResult" type="tns:CMonitorDataExport" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="CMonitorDataExport">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Status" type="tns:COpStatusData" />
+          <s:element minOccurs="0" maxOccurs="1" name="MonitorSet" type="tns:ArrayOfCMonitorData" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetAccountBackbones">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sUsername" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sPassword" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetAccountBackbonesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetAccountBackbonesResult" type="tns:CBackboneDataExport" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="CBackboneDataExport">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Status" type="tns:COpStatusData" />
+          <s:element minOccurs="0" maxOccurs="1" name="BackboneSet" type="tns:ArrayOfCBackboneData" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetReferencingMonitors">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sUsername" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sPassword" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="iMonitorId" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetReferencingMonitorsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetReferencingMonitorsResult" type="tns:CMonitorDataExport" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetAccountSites">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sUsername" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sPassword" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetAccountSitesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetAccountSitesResult" type="tns:CSiteDataExport" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="CSiteDataExport">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Status" type="tns:COpStatusData" />
+          <s:element minOccurs="0" maxOccurs="1" name="SiteSet" type="tns:ArrayOfCSiteData" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetMonitorSites">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sUsername" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sPassword" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="iMonitorId" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetMonitorSitesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetMonitorSitesResult" type="tns:CSiteDataExport" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetAccountSummary">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sUsername" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sPassword" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetAccountSummaryResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetAccountSummaryResult" type="tns:CAccountDataExport" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="CAccountDataExport">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Status" type="tns:COpStatusData" />
+          <s:element minOccurs="0" maxOccurs="1" name="AccountConstraints" type="tns:CAccountData" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="CAccountAuthenticationDataExport" nillable="true" type="tns:CAccountAuthenticationDataExport" />
+      <s:element name="CAccountConfigPackage" nillable="true" type="tns:CAccountConfigPackage" />
+      <s:element name="CMonitorDataExport" nillable="true" type="tns:CMonitorDataExport" />
+      <s:element name="CBackboneDataExport" nillable="true" type="tns:CBackboneDataExport" />
+      <s:element name="CSiteDataExport" nillable="true" type="tns:CSiteDataExport" />
+      <s:element name="CAccountDataExport" nillable="true" type="tns:CAccountDataExport" />
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="GSRAuthenticateSoapIn">
+    <wsdl:part name="parameters" element="tns:GSRAuthenticate" />
+  </wsdl:message>
+  <wsdl:message name="GSRAuthenticateSoapOut">
+    <wsdl:part name="parameters" element="tns:GSRAuthenticateResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetAccountConfigPackageSoapIn">
+    <wsdl:part name="parameters" element="tns:GetAccountConfigPackage" />
+  </wsdl:message>
+  <wsdl:message name="GetAccountConfigPackageSoapOut">
+    <wsdl:part name="parameters" element="tns:GetAccountConfigPackageResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetAccountPackageByMonitorClassSoapIn">
+    <wsdl:part name="parameters" element="tns:GetAccountPackageByMonitorClass" />
+  </wsdl:message>
+  <wsdl:message name="GetAccountPackageByMonitorClassSoapOut">
+    <wsdl:part name="parameters" element="tns:GetAccountPackageByMonitorClassResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetAccountMonitorsSoapIn">
+    <wsdl:part name="parameters" element="tns:GetAccountMonitors" />
+  </wsdl:message>
+  <wsdl:message name="GetAccountMonitorsSoapOut">
+    <wsdl:part name="parameters" element="tns:GetAccountMonitorsResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetAccountBackbonesSoapIn">
+    <wsdl:part name="parameters" element="tns:GetAccountBackbones" />
+  </wsdl:message>
+  <wsdl:message name="GetAccountBackbonesSoapOut">
+    <wsdl:part name="parameters" element="tns:GetAccountBackbonesResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetReferencingMonitorsSoapIn">
+    <wsdl:part name="parameters" element="tns:GetReferencingMonitors" />
+  </wsdl:message>
+  <wsdl:message name="GetReferencingMonitorsSoapOut">
+    <wsdl:part name="parameters" element="tns:GetReferencingMonitorsResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetAccountSitesSoapIn">
+    <wsdl:part name="parameters" element="tns:GetAccountSites" />
+  </wsdl:message>
+  <wsdl:message name="GetAccountSitesSoapOut">
+    <wsdl:part name="parameters" element="tns:GetAccountSitesResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetMonitorSitesSoapIn">
+    <wsdl:part name="parameters" element="tns:GetMonitorSites" />
+  </wsdl:message>
+  <wsdl:message name="GetMonitorSitesSoapOut">
+    <wsdl:part name="parameters" element="tns:GetMonitorSitesResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetAccountSummarySoapIn">
+    <wsdl:part name="parameters" element="tns:GetAccountSummary" />
+  </wsdl:message>
+  <wsdl:message name="GetAccountSummarySoapOut">
+    <wsdl:part name="parameters" element="tns:GetAccountSummaryResponse" />
+  </wsdl:message>
+  <wsdl:message name="GSRAuthenticateHttpGetIn">
+    <wsdl:part name="sUsername" type="s:string" />
+    <wsdl:part name="sPassword" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GSRAuthenticateHttpGetOut">
+    <wsdl:part name="Body" element="tns:CAccountAuthenticationDataExport" />
+  </wsdl:message>
+  <wsdl:message name="GetAccountConfigPackageHttpGetIn">
+    <wsdl:part name="sUsername" type="s:string" />
+    <wsdl:part name="sPassword" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetAccountConfigPackageHttpGetOut">
+    <wsdl:part name="Body" element="tns:CAccountConfigPackage" />
+  </wsdl:message>
+  <wsdl:message name="GetAccountPackageByMonitorClassHttpGetIn">
+    <wsdl:part name="sUsername" type="s:string" />
+    <wsdl:part name="sPassword" type="s:string" />
+    <wsdl:part name="sMonitorClasss" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetAccountPackageByMonitorClassHttpGetOut">
+    <wsdl:part name="Body" element="tns:CAccountConfigPackage" />
+  </wsdl:message>
+  <wsdl:message name="GetAccountMonitorsHttpGetIn">
+    <wsdl:part name="sUsername" type="s:string" />
+    <wsdl:part name="sPassword" type="s:string" />
+    <wsdl:part name="sMonitorSetDesignator" type="s:string" />
+    <wsdl:part name="sStatusDesignator" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetAccountMonitorsHttpGetOut">
+    <wsdl:part name="Body" element="tns:CMonitorDataExport" />
+  </wsdl:message>
+  <wsdl:message name="GetAccountBackbonesHttpGetIn">
+    <wsdl:part name="sUsername" type="s:string" />
+    <wsdl:part name="sPassword" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetAccountBackbonesHttpGetOut">
+    <wsdl:part name="Body" element="tns:CBackboneDataExport" />
+  </wsdl:message>
+  <wsdl:message name="GetReferencingMonitorsHttpGetIn">
+    <wsdl:part name="sUsername" type="s:string" />
+    <wsdl:part name="sPassword" type="s:string" />
+    <wsdl:part name="iMonitorId" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetReferencingMonitorsHttpGetOut">
+    <wsdl:part name="Body" element="tns:CMonitorDataExport" />
+  </wsdl:message>
+  <wsdl:message name="GetAccountSitesHttpGetIn">
+    <wsdl:part name="sUsername" type="s:string" />
+    <wsdl:part name="sPassword" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetAccountSitesHttpGetOut">
+    <wsdl:part name="Body" element="tns:CSiteDataExport" />
+  </wsdl:message>
+  <wsdl:message name="GetMonitorSitesHttpGetIn">
+    <wsdl:part name="sUsername" type="s:string" />
+    <wsdl:part name="sPassword" type="s:string" />
+    <wsdl:part name="iMonitorId" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetMonitorSitesHttpGetOut">
+    <wsdl:part name="Body" element="tns:CSiteDataExport" />
+  </wsdl:message>
+  <wsdl:message name="GetAccountSummaryHttpGetIn">
+    <wsdl:part name="sUsername" type="s:string" />
+    <wsdl:part name="sPassword" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetAccountSummaryHttpGetOut">
+    <wsdl:part name="Body" element="tns:CAccountDataExport" />
+  </wsdl:message>
+  <wsdl:message name="GSRAuthenticateHttpPostIn">
+    <wsdl:part name="sUsername" type="s:string" />
+    <wsdl:part name="sPassword" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GSRAuthenticateHttpPostOut">
+    <wsdl:part name="Body" element="tns:CAccountAuthenticationDataExport" />
+  </wsdl:message>
+  <wsdl:message name="GetAccountConfigPackageHttpPostIn">
+    <wsdl:part name="sUsername" type="s:string" />
+    <wsdl:part name="sPassword" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetAccountConfigPackageHttpPostOut">
+    <wsdl:part name="Body" element="tns:CAccountConfigPackage" />
+  </wsdl:message>
+  <wsdl:message name="GetAccountPackageByMonitorClassHttpPostIn">
+    <wsdl:part name="sUsername" type="s:string" />
+    <wsdl:part name="sPassword" type="s:string" />
+    <wsdl:part name="sMonitorClasss" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetAccountPackageByMonitorClassHttpPostOut">
+    <wsdl:part name="Body" element="tns:CAccountConfigPackage" />
+  </wsdl:message>
+  <wsdl:message name="GetAccountMonitorsHttpPostIn">
+    <wsdl:part name="sUsername" type="s:string" />
+    <wsdl:part name="sPassword" type="s:string" />
+    <wsdl:part name="sMonitorSetDesignator" type="s:string" />
+    <wsdl:part name="sStatusDesignator" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetAccountMonitorsHttpPostOut">
+    <wsdl:part name="Body" element="tns:CMonitorDataExport" />
+  </wsdl:message>
+  <wsdl:message name="GetAccountBackbonesHttpPostIn">
+    <wsdl:part name="sUsername" type="s:string" />
+    <wsdl:part name="sPassword" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetAccountBackbonesHttpPostOut">
+    <wsdl:part name="Body" element="tns:CBackboneDataExport" />
+  </wsdl:message>
+  <wsdl:message name="GetReferencingMonitorsHttpPostIn">
+    <wsdl:part name="sUsername" type="s:string" />
+    <wsdl:part name="sPassword" type="s:string" />
+    <wsdl:part name="iMonitorId" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetReferencingMonitorsHttpPostOut">
+    <wsdl:part name="Body" element="tns:CMonitorDataExport" />
+  </wsdl:message>
+  <wsdl:message name="GetAccountSitesHttpPostIn">
+    <wsdl:part name="sUsername" type="s:string" />
+    <wsdl:part name="sPassword" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetAccountSitesHttpPostOut">
+    <wsdl:part name="Body" element="tns:CSiteDataExport" />
+  </wsdl:message>
+  <wsdl:message name="GetMonitorSitesHttpPostIn">
+    <wsdl:part name="sUsername" type="s:string" />
+    <wsdl:part name="sPassword" type="s:string" />
+    <wsdl:part name="iMonitorId" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetMonitorSitesHttpPostOut">
+    <wsdl:part name="Body" element="tns:CSiteDataExport" />
+  </wsdl:message>
+  <wsdl:message name="GetAccountSummaryHttpPostIn">
+    <wsdl:part name="sUsername" type="s:string" />
+    <wsdl:part name="sPassword" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetAccountSummaryHttpPostOut">
+    <wsdl:part name="Body" element="tns:CAccountDataExport" />
+  </wsdl:message>
+  <wsdl:portType name="GpnAccountManagementServiceSoap">
+    <wsdl:operation name="GSRAuthenticate">
+      <documentation xmlns="http://schemas.xmlsoap.org/wsdl/">Method for authenticating a GPN Username/Password and returning a set of account constraints</documentation>
+      <wsdl:input message="tns:GSRAuthenticateSoapIn" />
+      <wsdl:output message="tns:GSRAuthenticateSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAccountConfigPackage">
+      <documentation xmlns="http://schemas.xmlsoap.org/wsdl/">Method for retreiving a complete account configuration package</documentation>
+      <wsdl:input message="tns:GetAccountConfigPackageSoapIn" />
+      <wsdl:output message="tns:GetAccountConfigPackageSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAccountPackageByMonitorClass">
+      <documentation xmlns="http://schemas.xmlsoap.org/wsdl/">Method for retreiving a complete account configuration package for a monitor class (UTATX | UTAONLY | SINGLEURL | EMPIRIXTX)</documentation>
+      <wsdl:input message="tns:GetAccountPackageByMonitorClassSoapIn" />
+      <wsdl:output message="tns:GetAccountPackageByMonitorClassSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAccountMonitors">
+      <documentation xmlns="http://schemas.xmlsoap.org/wsdl/">Method for retreiving a set of tests for an account. sMonitorSetDesignator=(ALL | SINGLEURL | SINGLEURLBENCHMARK | SINGLEURLANDBENCHMARK | EMPIRIXTX | EMPIRIXTXBENCHMARK | EMPIRIXTXANDBENCHMARK | UTATX | UTATXBENCHMARK | UTATXANDBENCHMARK | TRANSACTION | TRANSACTIONBENCHMARK | TRANSACTIONANDBENCHMARK), sStatusDesignator = (ALL | ACTIVE | INACTIVE)</documentation>
+      <wsdl:input message="tns:GetAccountMonitorsSoapIn" />
+      <wsdl:output message="tns:GetAccountMonitorsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAccountBackbones">
+      <documentation xmlns="http://schemas.xmlsoap.org/wsdl/">Method for retreiving a set of GPN Backbones</documentation>
+      <wsdl:input message="tns:GetAccountBackbonesSoapIn" />
+      <wsdl:output message="tns:GetAccountBackbonesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetReferencingMonitors">
+      <documentation xmlns="http://schemas.xmlsoap.org/wsdl/">Method for retreiving the set of non-deleted tests which reference the specified script</documentation>
+      <wsdl:input message="tns:GetReferencingMonitorsSoapIn" />
+      <wsdl:output message="tns:GetReferencingMonitorsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAccountSites">
+      <documentation xmlns="http://schemas.xmlsoap.org/wsdl/">Method for retreiving a set of available sites for an account.</documentation>
+      <wsdl:input message="tns:GetAccountSitesSoapIn" />
+      <wsdl:output message="tns:GetAccountSitesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetMonitorSites">
+      <documentation xmlns="http://schemas.xmlsoap.org/wsdl/">Method for retreiving a set of available sites for a monitor.</documentation>
+      <wsdl:input message="tns:GetMonitorSitesSoapIn" />
+      <wsdl:output message="tns:GetMonitorSitesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAccountSummary">
+      <documentation xmlns="http://schemas.xmlsoap.org/wsdl/">Method for retrieving account summary information.</documentation>
+      <wsdl:input message="tns:GetAccountSummarySoapIn" />
+      <wsdl:output message="tns:GetAccountSummarySoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="GpnAccountManagementServiceHttpGet">
+    <wsdl:operation name="GSRAuthenticate">
+      <documentation xmlns="http://schemas.xmlsoap.org/wsdl/">Method for authenticating a GPN Username/Password and returning a set of account constraints</documentation>
+      <wsdl:input message="tns:GSRAuthenticateHttpGetIn" />
+      <wsdl:output message="tns:GSRAuthenticateHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAccountConfigPackage">
+      <documentation xmlns="http://schemas.xmlsoap.org/wsdl/">Method for retreiving a complete account configuration package</documentation>
+      <wsdl:input message="tns:GetAccountConfigPackageHttpGetIn" />
+      <wsdl:output message="tns:GetAccountConfigPackageHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAccountPackageByMonitorClass">
+      <documentation xmlns="http://schemas.xmlsoap.org/wsdl/">Method for retreiving a complete account configuration package for a monitor class (UTATX | UTAONLY | SINGLEURL | EMPIRIXTX)</documentation>
+      <wsdl:input message="tns:GetAccountPackageByMonitorClassHttpGetIn" />
+      <wsdl:output message="tns:GetAccountPackageByMonitorClassHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAccountMonitors">
+      <documentation xmlns="http://schemas.xmlsoap.org/wsdl/">Method for retreiving a set of tests for an account. sMonitorSetDesignator=(ALL | SINGLEURL | SINGLEURLBENCHMARK | SINGLEURLANDBENCHMARK | EMPIRIXTX | EMPIRIXTXBENCHMARK | EMPIRIXTXANDBENCHMARK | UTATX | UTATXBENCHMARK | UTATXANDBENCHMARK | TRANSACTION | TRANSACTIONBENCHMARK | TRANSACTIONANDBENCHMARK), sStatusDesignator = (ALL | ACTIVE | INACTIVE)</documentation>
+      <wsdl:input message="tns:GetAccountMonitorsHttpGetIn" />
+      <wsdl:output message="tns:GetAccountMonitorsHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAccountBackbones">
+      <documentation xmlns="http://schemas.xmlsoap.org/wsdl/">Method for retreiving a set of GPN Backbones</documentation>
+      <wsdl:input message="tns:GetAccountBackbonesHttpGetIn" />
+      <wsdl:output message="tns:GetAccountBackbonesHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetReferencingMonitors">
+      <documentation xmlns="http://schemas.xmlsoap.org/wsdl/">Method for retreiving the set of non-deleted tests which reference the specified script</documentation>
+      <wsdl:input message="tns:GetReferencingMonitorsHttpGetIn" />
+      <wsdl:output message="tns:GetReferencingMonitorsHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAccountSites">
+      <documentation xmlns="http://schemas.xmlsoap.org/wsdl/">Method for retreiving a set of available sites for an account.</documentation>
+      <wsdl:input message="tns:GetAccountSitesHttpGetIn" />
+      <wsdl:output message="tns:GetAccountSitesHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetMonitorSites">
+      <documentation xmlns="http://schemas.xmlsoap.org/wsdl/">Method for retreiving a set of available sites for a monitor.</documentation>
+      <wsdl:input message="tns:GetMonitorSitesHttpGetIn" />
+      <wsdl:output message="tns:GetMonitorSitesHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAccountSummary">
+      <documentation xmlns="http://schemas.xmlsoap.org/wsdl/">Method for retrieving account summary information.</documentation>
+      <wsdl:input message="tns:GetAccountSummaryHttpGetIn" />
+      <wsdl:output message="tns:GetAccountSummaryHttpGetOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="GpnAccountManagementServiceHttpPost">
+    <wsdl:operation name="GSRAuthenticate">
+      <documentation xmlns="http://schemas.xmlsoap.org/wsdl/">Method for authenticating a GPN Username/Password and returning a set of account constraints</documentation>
+      <wsdl:input message="tns:GSRAuthenticateHttpPostIn" />
+      <wsdl:output message="tns:GSRAuthenticateHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAccountConfigPackage">
+      <documentation xmlns="http://schemas.xmlsoap.org/wsdl/">Method for retreiving a complete account configuration package</documentation>
+      <wsdl:input message="tns:GetAccountConfigPackageHttpPostIn" />
+      <wsdl:output message="tns:GetAccountConfigPackageHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAccountPackageByMonitorClass">
+      <documentation xmlns="http://schemas.xmlsoap.org/wsdl/">Method for retreiving a complete account configuration package for a monitor class (UTATX | UTAONLY | SINGLEURL | EMPIRIXTX)</documentation>
+      <wsdl:input message="tns:GetAccountPackageByMonitorClassHttpPostIn" />
+      <wsdl:output message="tns:GetAccountPackageByMonitorClassHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAccountMonitors">
+      <documentation xmlns="http://schemas.xmlsoap.org/wsdl/">Method for retreiving a set of tests for an account. sMonitorSetDesignator=(ALL | SINGLEURL | SINGLEURLBENCHMARK | SINGLEURLANDBENCHMARK | EMPIRIXTX | EMPIRIXTXBENCHMARK | EMPIRIXTXANDBENCHMARK | UTATX | UTATXBENCHMARK | UTATXANDBENCHMARK | TRANSACTION | TRANSACTIONBENCHMARK | TRANSACTIONANDBENCHMARK), sStatusDesignator = (ALL | ACTIVE | INACTIVE)</documentation>
+      <wsdl:input message="tns:GetAccountMonitorsHttpPostIn" />
+      <wsdl:output message="tns:GetAccountMonitorsHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAccountBackbones">
+      <documentation xmlns="http://schemas.xmlsoap.org/wsdl/">Method for retreiving a set of GPN Backbones</documentation>
+      <wsdl:input message="tns:GetAccountBackbonesHttpPostIn" />
+      <wsdl:output message="tns:GetAccountBackbonesHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetReferencingMonitors">
+      <documentation xmlns="http://schemas.xmlsoap.org/wsdl/">Method for retreiving the set of non-deleted tests which reference the specified script</documentation>
+      <wsdl:input message="tns:GetReferencingMonitorsHttpPostIn" />
+      <wsdl:output message="tns:GetReferencingMonitorsHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAccountSites">
+      <documentation xmlns="http://schemas.xmlsoap.org/wsdl/">Method for retreiving a set of available sites for an account.</documentation>
+      <wsdl:input message="tns:GetAccountSitesHttpPostIn" />
+      <wsdl:output message="tns:GetAccountSitesHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetMonitorSites">
+      <documentation xmlns="http://schemas.xmlsoap.org/wsdl/">Method for retreiving a set of available sites for a monitor.</documentation>
+      <wsdl:input message="tns:GetMonitorSitesHttpPostIn" />
+      <wsdl:output message="tns:GetMonitorSitesHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAccountSummary">
+      <documentation xmlns="http://schemas.xmlsoap.org/wsdl/">Method for retrieving account summary information.</documentation>
+      <wsdl:input message="tns:GetAccountSummaryHttpPostIn" />
+      <wsdl:output message="tns:GetAccountSummaryHttpPostOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="GpnAccountManagementServiceSoap" type="tns:GpnAccountManagementServiceSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document" />
+    <wsdl:operation name="GSRAuthenticate">
+      <soap:operation soapAction="http://gomeznetworks.com/webservices/GSRAuthenticate" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAccountConfigPackage">
+      <soap:operation soapAction="http://gomeznetworks.com/webservices/GetAccountConfigPackage" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAccountPackageByMonitorClass">
+      <soap:operation soapAction="http://gomeznetworks.com/webservices/GetAccountPackageByMonitorClass" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAccountMonitors">
+      <soap:operation soapAction="http://gomeznetworks.com/webservices/GetAccountMonitors" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAccountBackbones">
+      <soap:operation soapAction="http://gomeznetworks.com/webservices/GetAccountBackbones" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetReferencingMonitors">
+      <soap:operation soapAction="http://gomeznetworks.com/webservices/GetReferencingMonitors" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAccountSites">
+      <soap:operation soapAction="http://gomeznetworks.com/webservices/GetAccountSites" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMonitorSites">
+      <soap:operation soapAction="http://gomeznetworks.com/webservices/GetMonitorSites" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAccountSummary">
+      <soap:operation soapAction="http://gomeznetworks.com/webservices/GetAccountSummary" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="GpnAccountManagementServiceHttpGet" type="tns:GpnAccountManagementServiceHttpGet">
+    <http:binding verb="GET" />
+    <wsdl:operation name="GSRAuthenticate">
+      <http:operation location="/GSRAuthenticate" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAccountConfigPackage">
+      <http:operation location="/GetAccountConfigPackage" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAccountPackageByMonitorClass">
+      <http:operation location="/GetAccountPackageByMonitorClass" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAccountMonitors">
+      <http:operation location="/GetAccountMonitors" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAccountBackbones">
+      <http:operation location="/GetAccountBackbones" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetReferencingMonitors">
+      <http:operation location="/GetReferencingMonitors" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAccountSites">
+      <http:operation location="/GetAccountSites" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMonitorSites">
+      <http:operation location="/GetMonitorSites" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAccountSummary">
+      <http:operation location="/GetAccountSummary" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="GpnAccountManagementServiceHttpPost" type="tns:GpnAccountManagementServiceHttpPost">
+    <http:binding verb="POST" />
+    <wsdl:operation name="GSRAuthenticate">
+      <http:operation location="/GSRAuthenticate" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAccountConfigPackage">
+      <http:operation location="/GetAccountConfigPackage" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAccountPackageByMonitorClass">
+      <http:operation location="/GetAccountPackageByMonitorClass" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAccountMonitors">
+      <http:operation location="/GetAccountMonitors" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAccountBackbones">
+      <http:operation location="/GetAccountBackbones" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetReferencingMonitors">
+      <http:operation location="/GetReferencingMonitors" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAccountSites">
+      <http:operation location="/GetAccountSites" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMonitorSites">
+      <http:operation location="/GetMonitorSites" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAccountSummary">
+      <http:operation location="/GetAccountSummary" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="GpnAccountManagementService">
+    <documentation xmlns="http://schemas.xmlsoap.org/wsdl/">GPN UTA ACCOUNT MANAGEMENT WEB SERVICE</documentation>
+    <wsdl:port name="GpnAccountManagementServiceSoap" binding="tns:GpnAccountManagementServiceSoap">
+      <soap:address location="http://gpn.webservice.gomez.com/GPNAccountManagementService/GpnAccountManagementService.asmx" />
+    </wsdl:port>
+    <wsdl:port name="GpnAccountManagementServiceHttpGet" binding="tns:GpnAccountManagementServiceHttpGet">
+      <http:address location="http://gpn.webservice.gomez.com/GPNAccountManagementService/GpnAccountManagementService.asmx" />
+    </wsdl:port>
+    <wsdl:port name="GpnAccountManagementServiceHttpPost" binding="tns:GpnAccountManagementServiceHttpPost">
+      <http:address location="http://gpn.webservice.gomez.com/GPNAccountManagementService/GpnAccountManagementService.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

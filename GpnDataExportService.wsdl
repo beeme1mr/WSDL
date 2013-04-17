@@ -1,0 +1,701 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://gomeznetworks.com/webservices/" xmlns:s1="http://gomeznetworks.com/webservices/AbstractTypes" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" targetNamespace="http://gomeznetworks.com/webservices/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">GPN DATA EXPORT WEB SERVICE</wsdl:documentation>
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://gomeznetworks.com/webservices/">
+      <s:element name="OpenDataFeed">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sUsername" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sPassword" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="iMonitorIdSet" type="tns:ArrayOfInt" />
+            <s:element minOccurs="0" maxOccurs="1" name="iSiteIdSet" type="tns:ArrayOfInt" />
+            <s:element minOccurs="0" maxOccurs="1" name="sMonitorClassDesignator" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sDataDesignator" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sStartTime" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sEndTime" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sOrderDesignator" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfInt">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="int" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="OpenDataFeedResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="GpnOpenUtaDataFeedResponse" nillable="true" type="tns:InitFeedResponse" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="InitFeedResponse">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Status" type="tns:COpStatusData" />
+          <s:element minOccurs="0" maxOccurs="1" name="GPNGlobalConstraints" type="tns:CGpnUniversalGlobalConstraints" />
+          <s:element minOccurs="0" maxOccurs="1" name="GPNAccountConstraints" type="tns:CGpnUniversalAccountConstraints" />
+          <s:element minOccurs="0" maxOccurs="1" name="CurrentTime" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SessionToken" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="AcceptedMonitors" type="tns:ArrayOfInt1" />
+          <s:element minOccurs="0" maxOccurs="1" name="AcceptedSites" type="tns:ArrayOfInt2" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="COpStatusData">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="eStatus" type="tns:StatusType" />
+          <s:element minOccurs="0" maxOccurs="1" name="sErrorMessage" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:simpleType name="StatusType">
+        <s:restriction base="s:string">
+          <s:enumeration value="STATUS_SUCCESS" />
+          <s:enumeration value="STATUS_FAILED" />
+          <s:enumeration value="STATUS_DATA_NOT_READY" />
+        </s:restriction>
+      </s:simpleType>
+      <s:complexType name="CGpnUniversalGlobalConstraints">
+        <s:attribute name="MaxDataRequestsPerHourPerSession" type="s:int" use="required" />
+        <s:attribute name="MaxTotalSessions" type="s:int" use="required" />
+      </s:complexType>
+      <s:complexType name="CGpnUniversalAccountConstraints">
+        <s:attribute name="MaxDataRecordsPerRequest" type="s:int" use="required" />
+        <s:attribute name="MaxConcurrentSessions" type="s:int" use="required" />
+        <s:attribute name="MaxConcurrentRequests" type="s:int" use="required" />
+        <s:attribute name="MaxRequestIntervalBeforeExpirationInMinutes" type="s:int" use="required" />
+      </s:complexType>
+      <s:complexType name="ArrayOfInt1">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="mid" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfInt2">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="sid" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="OpenDataFeed2">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sUsername" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sPassword" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="iMonitorIdSet" type="tns:ArrayOfInt" />
+            <s:element minOccurs="0" maxOccurs="1" name="iSiteIdSet" type="tns:ArrayOfInt" />
+            <s:element minOccurs="0" maxOccurs="1" name="sMonitorClassDesignator" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sDataDesignator" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sLastN" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sStartTime" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sEndTime" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sOrderDesignator" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="OpenDataFeed2Response">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="GpnOpenUtaDataFeedResponse" nillable="true" type="tns:InitFeedResponse" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="OpenDataFeed3">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sUsername" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sPassword" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="iMonitorIdSet" type="tns:ArrayOfInt" />
+            <s:element minOccurs="0" maxOccurs="1" name="iSiteIdSet" type="tns:ArrayOfInt" />
+            <s:element minOccurs="0" maxOccurs="1" name="sMonitorClassDesignator" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sDataDesignator" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sLastN" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sStartTime" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sEndTime" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sOrderDesignator" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sTimeDesignator" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="OpenDataFeed3Response">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="GpnOpenUtaDataFeedResponse" nillable="true" type="tns:InitFeedResponse" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CloseDataFeed">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sSessionToken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CloseDataFeedResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="CloseDataFeedResult" type="tns:COpStatusData" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetResponseData">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sSessionToken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetResponseDataResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="GpnResponseData" nillable="true" type="tns:CGpnUniversalXmlDocResponse" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="CGpnUniversalXmlDocResponse">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Status" type="tns:COpStatusData" />
+          <s:element minOccurs="1" maxOccurs="1" name="NumRecords" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="CurrentTime" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="XmlDocument">
+            <s:complexType mixed="true">
+              <s:sequence>
+                <s:any />
+              </s:sequence>
+            </s:complexType>
+          </s:element>
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetErrorCodes">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetErrorCodesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="GpnErrorCodeResponse" nillable="true" type="tns:CGpnErrorCodeResponse" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="CGpnErrorCodeResponse">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Status" type="tns:COpStatusData" />
+          <s:element minOccurs="0" maxOccurs="unbounded" name="ErrorCodes" nillable="true" type="tns:CGpnErrorCode" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="CGpnErrorCode">
+        <s:attribute name="errornum" type="s:string" />
+        <s:attribute name="description" type="s:string" />
+      </s:complexType>
+      <s:element name="GpnOpenUtaDataFeedResponse" nillable="true" type="tns:InitFeedResponse" />
+      <s:element name="COpStatusData" nillable="true" type="tns:COpStatusData" />
+      <s:element name="GpnResponseData" nillable="true" type="tns:CGpnUniversalXmlDocResponse" />
+      <s:element name="GpnErrorCodeResponse" nillable="true" type="tns:CGpnErrorCodeResponse" />
+    </s:schema>
+    <s:schema targetNamespace="http://gomeznetworks.com/webservices/AbstractTypes">
+      <s:import namespace="http://schemas.xmlsoap.org/soap/encoding/" />
+      <s:complexType name="StringArray">
+        <s:complexContent mixed="false">
+          <s:restriction base="soapenc:Array">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="unbounded" name="String" type="s:string" />
+            </s:sequence>
+          </s:restriction>
+        </s:complexContent>
+      </s:complexType>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="OpenDataFeedSoapIn">
+    <wsdl:part name="parameters" element="tns:OpenDataFeed" />
+  </wsdl:message>
+  <wsdl:message name="OpenDataFeedSoapOut">
+    <wsdl:part name="parameters" element="tns:OpenDataFeedResponse" />
+  </wsdl:message>
+  <wsdl:message name="OpenDataFeed2SoapIn">
+    <wsdl:part name="parameters" element="tns:OpenDataFeed2" />
+  </wsdl:message>
+  <wsdl:message name="OpenDataFeed2SoapOut">
+    <wsdl:part name="parameters" element="tns:OpenDataFeed2Response" />
+  </wsdl:message>
+  <wsdl:message name="OpenDataFeed3SoapIn">
+    <wsdl:part name="parameters" element="tns:OpenDataFeed3" />
+  </wsdl:message>
+  <wsdl:message name="OpenDataFeed3SoapOut">
+    <wsdl:part name="parameters" element="tns:OpenDataFeed3Response" />
+  </wsdl:message>
+  <wsdl:message name="CloseDataFeedSoapIn">
+    <wsdl:part name="parameters" element="tns:CloseDataFeed" />
+  </wsdl:message>
+  <wsdl:message name="CloseDataFeedSoapOut">
+    <wsdl:part name="parameters" element="tns:CloseDataFeedResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetResponseDataSoapIn">
+    <wsdl:part name="parameters" element="tns:GetResponseData" />
+  </wsdl:message>
+  <wsdl:message name="GetResponseDataSoapOut">
+    <wsdl:part name="parameters" element="tns:GetResponseDataResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetErrorCodesSoapIn">
+    <wsdl:part name="parameters" element="tns:GetErrorCodes" />
+  </wsdl:message>
+  <wsdl:message name="GetErrorCodesSoapOut">
+    <wsdl:part name="parameters" element="tns:GetErrorCodesResponse" />
+  </wsdl:message>
+  <wsdl:message name="OpenDataFeedHttpGetIn">
+    <wsdl:part name="sUsername" type="s:string" />
+    <wsdl:part name="sPassword" type="s:string" />
+    <wsdl:part name="iMonitorIdSet" type="s1:StringArray" />
+    <wsdl:part name="iSiteIdSet" type="s1:StringArray" />
+    <wsdl:part name="sMonitorClassDesignator" type="s:string" />
+    <wsdl:part name="sDataDesignator" type="s:string" />
+    <wsdl:part name="sStartTime" type="s:string" />
+    <wsdl:part name="sEndTime" type="s:string" />
+    <wsdl:part name="sOrderDesignator" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="OpenDataFeedHttpGetOut">
+    <wsdl:part name="Body" element="tns:GpnOpenUtaDataFeedResponse" />
+  </wsdl:message>
+  <wsdl:message name="OpenDataFeed2HttpGetIn">
+    <wsdl:part name="sUsername" type="s:string" />
+    <wsdl:part name="sPassword" type="s:string" />
+    <wsdl:part name="iMonitorIdSet" type="s1:StringArray" />
+    <wsdl:part name="iSiteIdSet" type="s1:StringArray" />
+    <wsdl:part name="sMonitorClassDesignator" type="s:string" />
+    <wsdl:part name="sDataDesignator" type="s:string" />
+    <wsdl:part name="sLastN" type="s:string" />
+    <wsdl:part name="sStartTime" type="s:string" />
+    <wsdl:part name="sEndTime" type="s:string" />
+    <wsdl:part name="sOrderDesignator" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="OpenDataFeed2HttpGetOut">
+    <wsdl:part name="Body" element="tns:GpnOpenUtaDataFeedResponse" />
+  </wsdl:message>
+  <wsdl:message name="OpenDataFeed3HttpGetIn">
+    <wsdl:part name="sUsername" type="s:string" />
+    <wsdl:part name="sPassword" type="s:string" />
+    <wsdl:part name="iMonitorIdSet" type="s1:StringArray" />
+    <wsdl:part name="iSiteIdSet" type="s1:StringArray" />
+    <wsdl:part name="sMonitorClassDesignator" type="s:string" />
+    <wsdl:part name="sDataDesignator" type="s:string" />
+    <wsdl:part name="sLastN" type="s:string" />
+    <wsdl:part name="sStartTime" type="s:string" />
+    <wsdl:part name="sEndTime" type="s:string" />
+    <wsdl:part name="sOrderDesignator" type="s:string" />
+    <wsdl:part name="sTimeDesignator" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="OpenDataFeed3HttpGetOut">
+    <wsdl:part name="Body" element="tns:GpnOpenUtaDataFeedResponse" />
+  </wsdl:message>
+  <wsdl:message name="CloseDataFeedHttpGetIn">
+    <wsdl:part name="sSessionToken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="CloseDataFeedHttpGetOut">
+    <wsdl:part name="Body" element="tns:COpStatusData" />
+  </wsdl:message>
+  <wsdl:message name="GetResponseDataHttpGetIn">
+    <wsdl:part name="sSessionToken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetResponseDataHttpGetOut">
+    <wsdl:part name="Body" element="tns:GpnResponseData" />
+  </wsdl:message>
+  <wsdl:message name="GetErrorCodesHttpGetIn" />
+  <wsdl:message name="GetErrorCodesHttpGetOut">
+    <wsdl:part name="Body" element="tns:GpnErrorCodeResponse" />
+  </wsdl:message>
+  <wsdl:message name="OpenDataFeedHttpPostIn">
+    <wsdl:part name="sUsername" type="s:string" />
+    <wsdl:part name="sPassword" type="s:string" />
+    <wsdl:part name="iMonitorIdSet" type="s1:StringArray" />
+    <wsdl:part name="iSiteIdSet" type="s1:StringArray" />
+    <wsdl:part name="sMonitorClassDesignator" type="s:string" />
+    <wsdl:part name="sDataDesignator" type="s:string" />
+    <wsdl:part name="sStartTime" type="s:string" />
+    <wsdl:part name="sEndTime" type="s:string" />
+    <wsdl:part name="sOrderDesignator" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="OpenDataFeedHttpPostOut">
+    <wsdl:part name="Body" element="tns:GpnOpenUtaDataFeedResponse" />
+  </wsdl:message>
+  <wsdl:message name="OpenDataFeed2HttpPostIn">
+    <wsdl:part name="sUsername" type="s:string" />
+    <wsdl:part name="sPassword" type="s:string" />
+    <wsdl:part name="iMonitorIdSet" type="s1:StringArray" />
+    <wsdl:part name="iSiteIdSet" type="s1:StringArray" />
+    <wsdl:part name="sMonitorClassDesignator" type="s:string" />
+    <wsdl:part name="sDataDesignator" type="s:string" />
+    <wsdl:part name="sLastN" type="s:string" />
+    <wsdl:part name="sStartTime" type="s:string" />
+    <wsdl:part name="sEndTime" type="s:string" />
+    <wsdl:part name="sOrderDesignator" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="OpenDataFeed2HttpPostOut">
+    <wsdl:part name="Body" element="tns:GpnOpenUtaDataFeedResponse" />
+  </wsdl:message>
+  <wsdl:message name="OpenDataFeed3HttpPostIn">
+    <wsdl:part name="sUsername" type="s:string" />
+    <wsdl:part name="sPassword" type="s:string" />
+    <wsdl:part name="iMonitorIdSet" type="s1:StringArray" />
+    <wsdl:part name="iSiteIdSet" type="s1:StringArray" />
+    <wsdl:part name="sMonitorClassDesignator" type="s:string" />
+    <wsdl:part name="sDataDesignator" type="s:string" />
+    <wsdl:part name="sLastN" type="s:string" />
+    <wsdl:part name="sStartTime" type="s:string" />
+    <wsdl:part name="sEndTime" type="s:string" />
+    <wsdl:part name="sOrderDesignator" type="s:string" />
+    <wsdl:part name="sTimeDesignator" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="OpenDataFeed3HttpPostOut">
+    <wsdl:part name="Body" element="tns:GpnOpenUtaDataFeedResponse" />
+  </wsdl:message>
+  <wsdl:message name="CloseDataFeedHttpPostIn">
+    <wsdl:part name="sSessionToken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="CloseDataFeedHttpPostOut">
+    <wsdl:part name="Body" element="tns:COpStatusData" />
+  </wsdl:message>
+  <wsdl:message name="GetResponseDataHttpPostIn">
+    <wsdl:part name="sSessionToken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetResponseDataHttpPostOut">
+    <wsdl:part name="Body" element="tns:GpnResponseData" />
+  </wsdl:message>
+  <wsdl:message name="GetErrorCodesHttpPostIn" />
+  <wsdl:message name="GetErrorCodesHttpPostOut">
+    <wsdl:part name="Body" element="tns:GpnErrorCodeResponse" />
+  </wsdl:message>
+  <wsdl:portType name="GpnDataExportServiceSoap">
+    <wsdl:operation name="OpenDataFeed">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Method for initializing GPN data feed session</wsdl:documentation>
+      <wsdl:input message="tns:OpenDataFeedSoapIn" />
+      <wsdl:output message="tns:OpenDataFeedSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="OpenDataFeed2">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Method for initializing GPN data feed session</wsdl:documentation>
+      <wsdl:input message="tns:OpenDataFeed2SoapIn" />
+      <wsdl:output message="tns:OpenDataFeed2SoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="OpenDataFeed3">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Method for initializing GPN data feed session with time designator support</wsdl:documentation>
+      <wsdl:input message="tns:OpenDataFeed3SoapIn" />
+      <wsdl:output message="tns:OpenDataFeed3SoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CloseDataFeed">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Method for terminating GPN data feed session</wsdl:documentation>
+      <wsdl:input message="tns:CloseDataFeedSoapIn" />
+      <wsdl:output message="tns:CloseDataFeedSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetResponseData">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Method for returning a set of UTA Response via embedded XML document</wsdl:documentation>
+      <wsdl:input message="tns:GetResponseDataSoapIn" />
+      <wsdl:output message="tns:GetResponseDataSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetErrorCodes">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Method for exporting raw error code descriptions</wsdl:documentation>
+      <wsdl:input message="tns:GetErrorCodesSoapIn" />
+      <wsdl:output message="tns:GetErrorCodesSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="GpnDataExportServiceHttpGet">
+    <wsdl:operation name="OpenDataFeed">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Method for initializing GPN data feed session</wsdl:documentation>
+      <wsdl:input message="tns:OpenDataFeedHttpGetIn" />
+      <wsdl:output message="tns:OpenDataFeedHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="OpenDataFeed2">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Method for initializing GPN data feed session</wsdl:documentation>
+      <wsdl:input message="tns:OpenDataFeed2HttpGetIn" />
+      <wsdl:output message="tns:OpenDataFeed2HttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="OpenDataFeed3">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Method for initializing GPN data feed session with time designator support</wsdl:documentation>
+      <wsdl:input message="tns:OpenDataFeed3HttpGetIn" />
+      <wsdl:output message="tns:OpenDataFeed3HttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CloseDataFeed">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Method for terminating GPN data feed session</wsdl:documentation>
+      <wsdl:input message="tns:CloseDataFeedHttpGetIn" />
+      <wsdl:output message="tns:CloseDataFeedHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetResponseData">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Method for returning a set of UTA Response via embedded XML document</wsdl:documentation>
+      <wsdl:input message="tns:GetResponseDataHttpGetIn" />
+      <wsdl:output message="tns:GetResponseDataHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetErrorCodes">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Method for exporting raw error code descriptions</wsdl:documentation>
+      <wsdl:input message="tns:GetErrorCodesHttpGetIn" />
+      <wsdl:output message="tns:GetErrorCodesHttpGetOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="GpnDataExportServiceHttpPost">
+    <wsdl:operation name="OpenDataFeed">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Method for initializing GPN data feed session</wsdl:documentation>
+      <wsdl:input message="tns:OpenDataFeedHttpPostIn" />
+      <wsdl:output message="tns:OpenDataFeedHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="OpenDataFeed2">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Method for initializing GPN data feed session</wsdl:documentation>
+      <wsdl:input message="tns:OpenDataFeed2HttpPostIn" />
+      <wsdl:output message="tns:OpenDataFeed2HttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="OpenDataFeed3">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Method for initializing GPN data feed session with time designator support</wsdl:documentation>
+      <wsdl:input message="tns:OpenDataFeed3HttpPostIn" />
+      <wsdl:output message="tns:OpenDataFeed3HttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CloseDataFeed">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Method for terminating GPN data feed session</wsdl:documentation>
+      <wsdl:input message="tns:CloseDataFeedHttpPostIn" />
+      <wsdl:output message="tns:CloseDataFeedHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetResponseData">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Method for returning a set of UTA Response via embedded XML document</wsdl:documentation>
+      <wsdl:input message="tns:GetResponseDataHttpPostIn" />
+      <wsdl:output message="tns:GetResponseDataHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetErrorCodes">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Method for exporting raw error code descriptions</wsdl:documentation>
+      <wsdl:input message="tns:GetErrorCodesHttpPostIn" />
+      <wsdl:output message="tns:GetErrorCodesHttpPostOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="GpnDataExportServiceSoap" type="tns:GpnDataExportServiceSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="OpenDataFeed">
+      <soap:operation soapAction="http://gomeznetworks.com/webservices/OpenDataFeed" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="OpenDataFeed2">
+      <soap:operation soapAction="http://gomeznetworks.com/webservices/OpenDataFeed2" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="OpenDataFeed3">
+      <soap:operation soapAction="http://gomeznetworks.com/webservices/OpenDataFeed3" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CloseDataFeed">
+      <soap:operation soapAction="http://gomeznetworks.com/webservices/CloseDataFeed" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetResponseData">
+      <soap:operation soapAction="http://gomeznetworks.com/webservices/GetResponseData" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetErrorCodes">
+      <soap:operation soapAction="http://gomeznetworks.com/webservices/GetErrorCodes" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="GpnDataExportServiceSoap12" type="tns:GpnDataExportServiceSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="OpenDataFeed">
+      <soap12:operation soapAction="http://gomeznetworks.com/webservices/OpenDataFeed" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="OpenDataFeed2">
+      <soap12:operation soapAction="http://gomeznetworks.com/webservices/OpenDataFeed2" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="OpenDataFeed3">
+      <soap12:operation soapAction="http://gomeznetworks.com/webservices/OpenDataFeed3" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CloseDataFeed">
+      <soap12:operation soapAction="http://gomeznetworks.com/webservices/CloseDataFeed" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetResponseData">
+      <soap12:operation soapAction="http://gomeznetworks.com/webservices/GetResponseData" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetErrorCodes">
+      <soap12:operation soapAction="http://gomeznetworks.com/webservices/GetErrorCodes" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="GpnDataExportServiceHttpGet" type="tns:GpnDataExportServiceHttpGet">
+    <http:binding verb="GET" />
+    <wsdl:operation name="OpenDataFeed">
+      <http:operation location="/OpenDataFeed" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="OpenDataFeed2">
+      <http:operation location="/OpenDataFeed2" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="OpenDataFeed3">
+      <http:operation location="/OpenDataFeed3" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CloseDataFeed">
+      <http:operation location="/CloseDataFeed" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetResponseData">
+      <http:operation location="/GetResponseData" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetErrorCodes">
+      <http:operation location="/GetErrorCodes" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="GpnDataExportServiceHttpPost" type="tns:GpnDataExportServiceHttpPost">
+    <http:binding verb="POST" />
+    <wsdl:operation name="OpenDataFeed">
+      <http:operation location="/OpenDataFeed" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="OpenDataFeed2">
+      <http:operation location="/OpenDataFeed2" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="OpenDataFeed3">
+      <http:operation location="/OpenDataFeed3" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CloseDataFeed">
+      <http:operation location="/CloseDataFeed" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetResponseData">
+      <http:operation location="/GetResponseData" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetErrorCodes">
+      <http:operation location="/GetErrorCodes" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="GpnDataExportService">
+    <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">GPN DATA EXPORT WEB SERVICE</wsdl:documentation>
+    <wsdl:port name="GpnDataExportServiceSoap" binding="tns:GpnDataExportServiceSoap">
+      <soap:address location="http://gpn.webservice.gomez.com/DataExportService40/GpnDataExportService.asmx" />
+    </wsdl:port>
+    <wsdl:port name="GpnDataExportServiceSoap12" binding="tns:GpnDataExportServiceSoap12">
+      <soap12:address location="http://gpn.webservice.gomez.com/DataExportService40/GpnDataExportService.asmx" />
+    </wsdl:port>
+    <wsdl:port name="GpnDataExportServiceHttpGet" binding="tns:GpnDataExportServiceHttpGet">
+      <http:address location="http://gpn.webservice.gomez.com/DataExportService40/GpnDataExportService.asmx" />
+    </wsdl:port>
+    <wsdl:port name="GpnDataExportServiceHttpPost" binding="tns:GpnDataExportServiceHttpPost">
+      <http:address location="http://gpn.webservice.gomez.com/DataExportService40/GpnDataExportService.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
